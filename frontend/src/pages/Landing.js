@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const fade = (delay = 0) => ({ initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay, ease: [0.22,1,0.36,1] } });
@@ -305,8 +305,7 @@ export default function Landing() {
           <div className="flex items-center gap-2 font-head text-lg text-white font-bold">
             <span>🌿</span> AgriAssist
           </div>
-          <span>© 2025 AgriAssist. Made with ❤️ for Indian Farmers</span>
-          <span className="text-white/30">Hackathon Demo Project</span>
+          <span>© 2026 AgriAssist. Made with ❤️ for Indian Farmers</span>
         </div>
       </footer>
     </div>
