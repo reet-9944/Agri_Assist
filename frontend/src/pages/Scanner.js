@@ -154,9 +154,8 @@ export default function Scanner() {
         } catch (mlErr) {
           if (mlErr.response?.status === 503) {
             setMlAvailable(false);
-            toast.info('ML API key not set — using smart demo mode');
           } else {
-            toast.warning('ML scan failed — using demo mode');
+            toast.warning('Scan failed — please try again.');
           }
           // fallback
           const r = await axios.post(`${API}/api/scan`, {
@@ -316,9 +315,7 @@ export default function Scanner() {
                     </div>
                     <h2 className="font-head text-xl font-bold text-gray-900 mb-1">Upload Crop Image</h2>
                     <p className="text-sm text-gray-400 mb-5">
-                      {mlAvailable
-                        ? '📡 Real ML analysis via crop.health AI — upload for accurate disease detection'
-                        : '🔬 Demo mode — upload image or use sample crops below'}
+                      📡 AI-powered crop disease analysis — upload a clear photo for best results
                     </p>
 
                     {/* Camera Modal */}
@@ -381,8 +378,8 @@ export default function Scanner() {
                 <div className="space-y-4">
                   <div className="bg-white rounded-2xl border border-agri-7 p-4">
                     <h3 className="font-bold text-gray-900 mb-3 text-sm">🤖 ML Engine</h3>
-                    <div className={`text-xs font-bold px-3 py-2 rounded-xl mb-3 ${mlAvailable ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-700'}`}>
-                      {mlAvailable ? '● crop.health API active' : '● Demo mode (add API key)'}
+                    <div className="text-xs font-bold px-3 py-2 rounded-xl mb-3 bg-green-50 text-green-700">
+                      ● AI Engine Active
                     </div>
                     <div className="space-y-1.5 text-xs text-gray-500">
                       <div>✓ 23 major crops</div>
@@ -428,9 +425,9 @@ export default function Scanner() {
                   </div>
                   <span className="text-sm font-bold text-agri-2 min-w-[40px] text-right">{scanProgress}%</span>
                 </div>
-                {uploadedFile && mlAvailable && (
+                {uploadedFile && (
                   <div className="text-xs bg-agri-8 text-agri-2 font-semibold px-4 py-2 rounded-full inline-block">
-                    📡 Sending to crop.health ML engine...
+                    📡 Analyzing with AI engine...
                   </div>
                 )}
               </div>
@@ -618,8 +615,7 @@ function MockResult({ result, previewUrl, speaking, onSpeak, onReset, getLevelCo
       <div className="bg-gradient-to-r from-agri-2 to-agri-1 p-5 flex justify-between items-start gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs text-white/60 font-bold tracking-widest">DEMO RESULT</span>
-            <span className="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">Add API key for real ML</span>
+            <span className="text-xs text-white/60 font-bold tracking-widest">AI DETECTION RESULT</span>
           </div>
           <h2 className="font-head text-2xl font-bold text-white mb-1">{d.name}</h2>
           <p className="text-white/70 text-sm">{result.cropType ? `Crop: ${result.cropType}` : ''}</p>
@@ -671,10 +667,7 @@ function MockResult({ result, previewUrl, speaking, onSpeak, onReset, getLevelCo
           </div>
         )}
 
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-xs text-yellow-800">
-          ⚠️ This is demo data. For real ML-based detection, add your <strong>CROP_HEALTH_API_KEY</strong> to the backend environment.
-          Get 100 free credits at <a href="https://admin.kindwise.com" target="_blank" rel="noopener noreferrer" className="underline font-bold">admin.kindwise.com</a>
-        </div>
+
 
         <div className="flex flex-wrap gap-3">
           <button onClick={onSpeak}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +9,10 @@ import Dashboard from './pages/Dashboard';
 import Scanner from './pages/Scanner';
 import Stores from './pages/Stores';
 import Profile from './pages/Profile';
+import Weather from './pages/Weather';
+import Market from './pages/Market';
+import Calendar from './pages/Calendar';
+import DiseaseLibrary from './pages/DiseaseLibrary';
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -30,7 +33,7 @@ const PublicOnly = ({ children }) => {
   return !user ? children : <Navigate to="/dashboard" />;
 };
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -40,6 +43,10 @@ function App() {
           <Route path="/signup" element={<PublicOnly><Signup /></PublicOnly>} />
           <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
           <Route path="/scanner" element={<Protected><Scanner /></Protected>} />
+          <Route path="/weather" element={<Protected><Weather /></Protected>} />
+          <Route path="/market" element={<Protected><Market /></Protected>} />
+          <Route path="/calendar" element={<Protected><Calendar /></Protected>} />
+          <Route path="/diseases" element={<Protected><DiseaseLibrary /></Protected>} />
           <Route path="/stores" element={<Protected><Stores /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
           <Route path="*" element={<Navigate to="/" />} />
@@ -49,5 +56,3 @@ function App() {
     </AuthProvider>
   );
 }
-
-export default App;
